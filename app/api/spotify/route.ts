@@ -119,7 +119,7 @@ async function fetchRecentTracks(token: string) {
     return tracks
   }
 
-  // Rate limited or error – return stale cache, don't overwrite with empty
+  console.error('fetchRecentTracks failed:', res.status, await res.text().catch(() => ''))
   return (cache.recentTracks as CacheEntry<ReturnType<typeof formatTrack>[]> | undefined)?.data ?? []
 }
 
@@ -139,7 +139,7 @@ async function fetchTopTracks(token: string) {
     return tracks
   }
 
-  // Rate limited or error – return stale cache, don't overwrite with empty
+  console.error('fetchTopTracks failed:', res.status, await res.text().catch(() => ''))
   return (cache.topTracks as CacheEntry<ReturnType<typeof formatTrack>[]> | undefined)?.data ?? []
 }
 
