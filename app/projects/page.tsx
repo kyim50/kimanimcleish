@@ -310,13 +310,15 @@ export default function Projects() {
               onClick={() => { setActiveFilter(filter.id); setExpandedProject(null) }}
               className={`px-3 py-1 rounded-md text-[11px] font-mono transition-all duration-300 ${
                 activeFilter === filter.id
-                  ? isLight
-                    ? 'bg-gray-900 text-white'
-                    : 'bg-white text-black'
+                  ? ''
                   : isLight
                     ? 'bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-gray-800'
                     : 'bg-[#111] text-gray-500 hover:bg-[#1a1a1a] hover:text-gray-300'
               }`}
+              style={activeFilter === filter.id ? {
+                backgroundColor: isLight ? '#111' : '#fff',
+                color: isLight ? '#fff' : '#000',
+              } : undefined}
             >
               {filter.cmd}
             </button>
