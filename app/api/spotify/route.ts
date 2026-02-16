@@ -120,7 +120,7 @@ async function fetchRecentTracks(token: string) {
   }
 
   // Rate limited or error – return stale cache, don't overwrite with empty
-  return cache.recentTracks?.data ?? []
+  return (cache.recentTracks as CacheEntry<ReturnType<typeof formatTrack>[]> | undefined)?.data ?? []
 }
 
 async function fetchTopTracks(token: string) {
@@ -140,7 +140,7 @@ async function fetchTopTracks(token: string) {
   }
 
   // Rate limited or error – return stale cache, don't overwrite with empty
-  return cache.topTracks?.data ?? []
+  return (cache.topTracks as CacheEntry<ReturnType<typeof formatTrack>[]> | undefined)?.data ?? []
 }
 
 /* ── Main handler ── */
