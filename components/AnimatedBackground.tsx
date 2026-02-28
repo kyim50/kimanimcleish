@@ -147,15 +147,13 @@ export default function AnimatedBackground() {
     char: ['~', '-', '.', '`', ',', '~'][i % 6],
   }))
 
-  const matrixChars = '01{}[]<>/\\|=-+*#@&%$!?;:_.~^'
+  const matrixText = 'i hate emma'
   const matrixColumns: MatrixColumn[] = Array.from({ length: 25 }, (_, i) => ({
     id: i,
     left: Math.round((i * 39 + 2) % 97),
     speed: 8 + (i * 2.3) % 14,
     delay: (i * 1.3) % 8,
-    chars: Array.from({ length: 12 + (i % 8) }, (_, j) =>
-      matrixChars[(i * 7 + j * 13) % matrixChars.length]
-    ).join('\n'),
+    chars: Array.from({ length: 12 + (i % 8) }, () => matrixText).join('\n'),
     opacity: 0.08 + (i % 4) * 0.03,
   }))
 
