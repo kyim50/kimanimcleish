@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { useTheme } from './ThemeProvider'
 
 interface Cloud {
@@ -65,7 +65,6 @@ interface CircuitLine {
 }
 
 export default function AnimatedBackground() {
-  const [mounted, setMounted] = useState(false)
   const { theme } = useTheme()
   const isLight = theme === 'light'
   const scrollRef = useRef(0)
@@ -76,12 +75,6 @@ export default function AnimatedBackground() {
   const rafRef = useRef<number>(0)
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  useEffect(() => {
-    if (!mounted) return
-
     const handleScroll = () => {
       scrollRef.current = window.scrollY
     }
@@ -107,9 +100,7 @@ export default function AnimatedBackground() {
       window.removeEventListener('scroll', handleScroll)
       cancelAnimationFrame(rafRef.current)
     }
-  }, [mounted])
-
-  if (!mounted) return null
+  }, [])
 
   const clouds: Cloud[] = [
     { id: 1, art: '_(  )_', top: 8, speed: 45, opacity: 0.06, size: 12 },
@@ -147,14 +138,18 @@ export default function AnimatedBackground() {
     char: ['~', '-', '.', '`', ',', '~'][i % 6],
   }))
 
-  const matrixText = 'i hate emma'
-  const matrixColumns: MatrixColumn[] = Array.from({ length: 25 }, (_, i) => ({
+  const matrixChars = [
+    '0', '1', '6', '7', '67', '$', '#', '@', '%', '&', '*', '!', '?', '~',
+    '^', '<', '>', '|', '/', '\\', '+', '=', '{', '}', '[', ']', ':', ';',
+    '01', '10', '67', '11', '00', '$7', '#6', '@1', '%0', '&7', '!6',
+  ]
+  const matrixColumns: MatrixColumn[] = Array.from({ length: 35 }, (_, i) => ({
     id: i,
-    left: Math.round((i * 39 + 2) % 97),
+    left: Math.round((i * 27 + 2) % 97),
     speed: 8 + (i * 2.3) % 14,
-    delay: (i * 1.3) % 8,
-    chars: Array.from({ length: 12 + (i % 8) }, () => matrixText).join('\n'),
-    opacity: 0.08 + (i % 4) * 0.03,
+    delay: -((i * 1.3) % 8),
+    chars: Array.from({ length: 18 + (i % 10) }, (_, j) => matrixChars[(i + j) % matrixChars.length]).join('\n'),
+    opacity: 0.18 + (i % 4) * 0.05,
   }))
 
   const codeSnippets: CodeSnippet[] = [

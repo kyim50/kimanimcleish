@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from 'react'
 import Footer from '@/components/Footer'
 import { useTextScramble } from '@/hooks/useTextScramble'
 import { useTheme } from '@/components/ThemeProvider'
+import TechBadge from '@/components/TechBadge'
 
 function useInView(threshold = 0.1) {
   const ref = useRef<HTMLDivElement>(null)
@@ -96,10 +97,10 @@ export default function About() {
       description: 'Medical AI symptom checker trained on 200k+ patient-doctor conversations with 90% diagnostic accuracy.',
       icon: '{+}',
       tech: [
-        { name: 'TypeScript', color: 'bg-blue-500' },
-        { name: 'Next.js', color: 'bg-gray-600' },
-        { name: 'Open Router', color: 'bg-green-500' },
-        { name: 'RAG', color: 'bg-purple-500' },
+        { name: 'TypeScript' },
+        { name: 'Next.js' },
+        { name: 'Open Router' },
+        { name: 'RAG' },
       ],
     },
     {
@@ -107,9 +108,9 @@ export default function About() {
       description: 'Couple-themed mobile app featuring custom animations and interactive experiences.',
       icon: "<'>",
       tech: [
-        { name: 'React Native', color: 'bg-cyan-500' },
-        { name: 'TypeScript', color: 'bg-blue-500' },
-        { name: 'Firebase', color: 'bg-orange-500' },
+        { name: 'React Native' },
+        { name: 'TypeScript' },
+        { name: 'Firebase' },
       ],
     },
     {
@@ -117,9 +118,9 @@ export default function About() {
       description: 'Location-based helper-matching app built in 24 hours for the Intellibus Hackathon.',
       icon: '/|\\',
       tech: [
-        { name: 'Next.js', color: 'bg-gray-600' },
-        { name: 'Geolocation API', color: 'bg-green-500' },
-        { name: 'Firebase', color: 'bg-orange-500' },
+        { name: 'Next.js' },
+        { name: 'Geolocation API' },
+        { name: 'Firebase' },
       ],
     },
   ]
@@ -397,14 +398,9 @@ export default function About() {
                   </h3>
                   <p className="text-gray-400 text-xs leading-relaxed mt-0.5">{project.description}</p>
                 </div>
-                <div className="flex flex-wrap gap-2.5 max-w-[320px] justify-end">
+                <div className="flex flex-wrap gap-2 max-w-[320px] justify-end">
                   {project.tech.map((t) => (
-                    <span
-                      key={t.name}
-                      className={`${t.color} px-2 py-0.5 rounded-full text-[10px] font-medium group-hover:scale-110 transition-transform duration-200`}
-                    >
-                      {t.name}
-                    </span>
+                    <TechBadge key={t.name} name={t.name} />
                   ))}
                 </div>
               </div>

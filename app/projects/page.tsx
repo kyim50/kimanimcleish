@@ -5,6 +5,7 @@ import Footer from '@/components/Footer'
 import { useTextScramble } from '@/hooks/useTextScramble'
 import { useTilt } from '@/hooks/useTilt'
 import { useTheme } from '@/components/ThemeProvider'
+import TechBadge from '@/components/TechBadge'
 
 function useInView(threshold = 0.1) {
   const ref = useRef<HTMLDivElement>(null)
@@ -99,10 +100,10 @@ export default function Projects() {
       category: 'ai',
       details: 'Built a RAG pipeline that processes medical queries through a fine-tuned model, cross-referencing a vectorized knowledge base of 200k+ conversations for accurate symptom analysis.',
       tech: [
-        { name: 'TypeScript', color: 'bg-blue-500' },
-        { name: 'Next.js', color: 'bg-gray-600' },
-        { name: 'Open Router', color: 'bg-green-500' },
-        { name: 'RAG', color: 'bg-purple-500' },
+        { name: 'TypeScript' },
+        { name: 'Next.js' },
+        { name: 'Open Router' },
+        { name: 'RAG' },
       ],
     },
     {
@@ -113,9 +114,9 @@ export default function Projects() {
       category: 'mobile',
       details: 'Features real-time sync between partners, custom Lottie animations, shared calendars, and a widget system for home screens. Published on TestFlight.',
       tech: [
-        { name: 'React Native', color: 'bg-cyan-500' },
-        { name: 'TypeScript', color: 'bg-blue-500' },
-        { name: 'Firebase', color: 'bg-orange-500' },
+        { name: 'React Native' },
+        { name: 'TypeScript' },
+        { name: 'Firebase' },
       ],
     },
     {
@@ -126,9 +127,9 @@ export default function Projects() {
       category: 'web',
       details: 'Uses geolocation to match helpers with nearby requesters in real-time. Features live map tracking, push notifications, and a reputation system.',
       tech: [
-        { name: 'Next.js', color: 'bg-gray-600' },
-        { name: 'Geolocation API', color: 'bg-green-500' },
-        { name: 'Firebase', color: 'bg-orange-500' },
+        { name: 'Next.js' },
+        { name: 'Geolocation API' },
+        { name: 'Firebase' },
       ],
     },
     {
@@ -139,10 +140,10 @@ export default function Projects() {
       category: 'web',
       details: 'A gamified task management PWA with real-world location-based quests. Uses Mapbox for interactive maps and Firebase for real-time multiplayer features.',
       tech: [
-        { name: 'React', color: 'bg-cyan-500' },
-        { name: 'Mapbox API', color: 'bg-blue-500' },
-        { name: 'Firebase', color: 'bg-orange-500' },
-        { name: 'PWA', color: 'bg-green-500' },
+        { name: 'React' },
+        { name: 'Mapbox API' },
+        { name: 'Firebase' },
+        { name: 'PWA' },
       ],
     },
     {
@@ -153,10 +154,10 @@ export default function Projects() {
       category: 'mobile',
       details: 'Features a recommendation engine for art styles, a swipe-based artist discovery flow, and integrated payment processing for commissions.',
       tech: [
-        { name: 'React', color: 'bg-cyan-500' },
-        { name: 'Node.js', color: 'bg-green-500' },
-        { name: 'Supabase', color: 'bg-emerald-500' },
-        { name: 'REST API', color: 'bg-blue-500' },
+        { name: 'React' },
+        { name: 'Node.js' },
+        { name: 'Supabase' },
+        { name: 'REST API' },
       ],
     },
     {
@@ -167,9 +168,9 @@ export default function Projects() {
       category: 'mobile',
       details: 'Independently built from concept to deployment at Sagicor. Uses medical algorithms to calculate cardiovascular risk scores with personalized health recommendations.',
       tech: [
-        { name: 'React', color: 'bg-cyan-500' },
-        { name: 'TypeScript', color: 'bg-blue-500' },
-        { name: 'Health APIs', color: 'bg-green-500' },
+        { name: 'React' },
+        { name: 'TypeScript' },
+        { name: 'Health APIs' },
       ],
     },
     {
@@ -180,9 +181,9 @@ export default function Projects() {
       category: 'backend',
       details: 'Designed and implemented a scalable REST API for processing payments, with transaction logging, webhook integrations, and comprehensive error handling.',
       tech: [
-        { name: 'Node.js', color: 'bg-green-500' },
-        { name: 'TypeScript', color: 'bg-blue-500' },
-        { name: 'REST API', color: 'bg-gray-600' },
+        { name: 'Node.js' },
+        { name: 'TypeScript' },
+        { name: 'REST API' },
       ],
     },
     {
@@ -193,9 +194,9 @@ export default function Projects() {
       category: 'web',
       details: 'A cloud file manager with drag-and-drop uploads, folder organization, sharing links, and real-time storage analytics powered by Azure.',
       tech: [
-        { name: 'Azure', color: 'bg-blue-500' },
-        { name: 'React', color: 'bg-cyan-500' },
-        { name: 'REST API', color: 'bg-green-500' },
+        { name: 'Azure' },
+        { name: 'React' },
+        { name: 'REST API' },
       ],
     },
   ]
@@ -374,14 +375,9 @@ export default function Projects() {
                       {project.description}
                     </p>
                   </div>
-                  <div className="flex flex-wrap gap-2.5 max-w-[320px] justify-end">
+                  <div className="flex flex-wrap gap-2 max-w-[320px] justify-end">
                     {project.tech.map((t) => (
-                      <span
-                        key={t.name}
-                        className={`${t.color} px-2.5 py-1 rounded-full text-[10px] font-medium group-hover:scale-110 transition-transform duration-200`}
-                      >
-                        {t.name}
-                      </span>
+                      <TechBadge key={t.name} name={t.name} />
                     ))}
                   </div>
                 </a>
