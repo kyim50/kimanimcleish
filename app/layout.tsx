@@ -1,39 +1,38 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import type { Metadata, Viewport } from 'next'
+import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
-import Navigation from '@/components/Navigation'
-import AnimatedBackground from '@/components/AnimatedBackground'
-import CursorGlow from '@/components/CursorGlow'
-import ScrollProgress from '@/components/ScrollProgress'
-import SpotifyPlayer from '@/components/SpotifyPlayer'
-import ThemeProvider from '@/components/ThemeProvider'
+import Gate from '@/components/os/Gate'
+import { SITE_URL, SITE_NAME, OG_IMAGE, OG_ALT } from '@/lib/site'
 
-const inter = Inter({ subsets: ['latin'] })
+const sans = Geist({ subsets: ['latin'], variable: '--font-sans', weight: ['400', '500', '600', '700', '800'] })
+const mono = Geist_Mono({ subsets: ['latin'], variable: '--font-mono', weight: ['400', '500', '600'] })
+
+const description =
+  'Kimani McLeish is a software engineer in Kingston, Jamaica building production systems end to end: the app, the backend, the data pipelines and the infrastructure. Open to freelance builds.'
 
 export const metadata: Metadata = {
-  title: 'Kimani McLeish - Software Engineer',
-  description: 'Software engineer and creative developer from Kingston, Jamaica building intelligent applications and digital experiences.',
+  metadataBase: new URL(SITE_URL),
+  title: { default: 'Kimani McLeish, software engineer in Kingston', template: `%s | ${SITE_NAME}` },
+  description,
+  applicationName: 'kimaniOS',
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  keywords: ['Kimani McLeish', 'software engineer', 'Kingston Jamaica', 'freelance developer Jamaica', 'Go', 'TypeScript', 'React Native', 'PostgreSQL'],
+  alternates: { canonical: '/' },
+  robots: { index: true, follow: true },
+  openGraph: { title: 'Kimani McLeish, software engineer in Kingston', description, url: SITE_URL, siteName: SITE_NAME, type: 'website', locale: 'en_JM', images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: OG_ALT }] },
+  twitter: { card: 'summary_large_image', title: 'Kimani McLeish, software engineer in Kingston', description, images: [OG_IMAGE] },
 }
+export const viewport: Viewport = { width: 'device-width', initialScale: 1, themeColor: '#F3EEE3' }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+const PRE = `try{var d=document.documentElement;var t=localStorage.getItem('kos_theme')||'light';d.setAttribute('data-theme',t);d.style.colorScheme=t;if(location.pathname==='/'&&!sessionStorage.getItem('kos_user')&&!/[?&]os=desktop/.test(location.search))d.classList.add('pre')}catch(e){}`
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="scroll-smooth" data-theme="dark" suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: `try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);document.documentElement.classList.add(t);document.documentElement.style.colorScheme=t}catch(e){}` }} />
-      </head>
-      <body className={`${inter.className}`} style={{ backgroundColor: '#000', color: '#fff', transition: 'background-color 0.3s ease, color 0.3s ease' }}>
-        <ThemeProvider>
-          <CursorGlow />
-          <AnimatedBackground />
-          <Navigation />
-          <ScrollProgress />
-          <main className="relative z-10">{children}</main>
-          <SpotifyPlayer />
-        </ThemeProvider>
+    <html lang="en" data-theme="light" className={`${sans.variable} ${mono.variable}`} suppressHydrationWarning>
+      <head><script dangerouslySetInnerHTML={{ __html: PRE }} /></head>
+      <body>
+        <Gate>{children}</Gate>
       </body>
     </html>
   )
