@@ -1,11 +1,11 @@
 import type { Metadata, Viewport } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import localFont from 'next/font/local'
 import './globals.css'
 import Gate from '@/components/os/Gate'
 import { SITE_URL, SITE_NAME, OG_IMAGE, OG_ALT } from '@/lib/site'
 
-const sans = Geist({ subsets: ['latin'], variable: '--font-sans', weight: ['400', '500', '600', '700', '800'] })
-const mono = Geist_Mono({ subsets: ['latin'], variable: '--font-mono', weight: ['400', '500', '600'] })
+const sans = localFont({ src: './fonts/Geist-Variable.woff2', variable: '--font-sans', weight: '100 900', display: 'swap' })
+const mono = localFont({ src: './fonts/GeistMono-Variable.woff2', variable: '--font-mono', weight: '100 900', display: 'swap' })
 
 const description =
   'Kimani McLeish is a software engineer in Kingston, Jamaica building production systems end to end: the app, the backend, the data pipelines and the infrastructure. Open to freelance builds.'
